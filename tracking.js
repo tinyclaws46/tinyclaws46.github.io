@@ -1,137 +1,141 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log(`${getTimestamp()}, view, page_load`);
-    initializeTracking();
+    logEvent('view', 'page_load');
+    setupEventTracking();
 });
 
-function initializeTracking() {
+function setupEventTracking() {
     document.addEventListener('click', function(event) {
-        const target = event.target;
-        let elementType = getElementType(target);
-        console.log(`${getTimestamp()}, click, ${elementType}`);
+        const element = event.target;
+        const eventObject = identifyEventObject(element);
+        logEvent('click', eventObject);
     });
-
-    setupViewTracking();
-    trackNavigation();
-    trackSpecificElements();
+    trackSectionViews();
+    trackElementViews();
+    trackCVLink();
 }
 
-function getElementType(element) {
-    if (element.tagName === 'A') {
-        if (element.href.endsWith('.pdf')) return `cv_download: ${element.textContent.trim()}`;
-        return `link: ${element.textContent.trim() || element.href}`;
-    }
+function identifyEventObject(element) {
     if (element.tagName === 'IMG') {
-        const imgAlt = element.alt || 'unnamed image';
-        const imgSrc = element.src.split('/').pop();
-        return `image: ${imgAlt} (${imgSrc})`;
+        if (element.closest('#That\\'s\\ me')) {
+            return `image: profile picture`;
+        } else if (element.closest('#birthplace')) {
+            return `image: birthplace (${element.alt})`;
+        }
+        return `image: ${element.alt || 'unnamed'}`;
     }
-    if (element.tagName === 'BUTTON') return `button: ${element.textContent.trim()}`;
-    if (element.tagName === 'LI') return `list_item: ${element.textContent.trim().substring(0, 30)}...`;
-    if (element.tagName === 'H1' || element.tagName === 'H2' || element.tagName === 'H3') {
+    if (element.tagName === 'A') {
+        if (element.href.includes('resume.pdf')) {
+            return `hyperlink: CV/Resume download`;
+        }
+        if (element.closest('nav')) {
+            return `navigation: ${element.textContent.trim()}`;
+        }
+        return `hyperlink: ${element.textContent.trim()}`;
+    }
+    if (element.tagName === 'P') {
+        if (element.closest('#about')) {
+            return `text: about paragraph`;
+        }
+        return `text: ${element.textContent.substring(0, 20)}...`;
+    }
+    if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(element.tagName)) {
         return `heading: ${element.textContent.trim()}`;
     }
-    if (element.tagName === 'P') return `text: ${element.textContent.trim().substring(0, 30)}...`;
-    
-    if (element.closest('header')) return `header_element: ${element.tagName}`;
-    if (element.closest('footer')) return `footer_element: ${element.tagName}`;
-    if (element.closest('nav')) return `navigation_element: ${element.tagName}`;
-    
-    if (element.closest('section')) {
-        const section = element.closest('section');
-        const sectionId = section.id || 'unnamed section';
-        return `section_element: ${sectionId} - ${element.tagName}`;
+    if (element.tagName === 'LI') {
+        if (element.closest('#education')) {
+            return `text: education info`;
+        } else if (element.closest('#skills')) {
+            return `text: skill item`;
+        }
+        return `list item: ${element.textContent.substring(0, 20)}...`;
     }
-
-    return `${element.tagName.toLowerCase()}: ${element.className || 'no-class'}`;
+    const section = element.closest('section');
+    if (section) {
+        return `${element.tagName.toLowerCase()}: in ${section.id || 'unnamed'} section`;
+    }
+    return `${element.tagName.toLowerCase()}: ${element.className || 'unnamed'}`;
 }
 
-function setupViewTracking() {
+function trackSectionViews() {
     if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const elementType = getElementType(entry.target);
-                    console.log(`${getTimestamp()}, view, ${elementType}`);
-                    observer.unobserve(entry.target);
+                    const section = entry.target;
+                    let sectionType = '';
+                    switch(section.id) {
+                        case 'about':
+                            sectionType = 'about paragraph section';
+                            break;
+                        case 'That\'s me':
+                            sectionType = 'profile picture section';
+                            break;
+                        case 'birthplace':
+                            sectionType = 'birthplace images section';
+                            break;
+                        case 'education':
+                            sectionType = 'education background section';
+                            break;
+                        case 'skills':
+                            sectionType = 'technical skills section';
+                            break;
+                        case 'cv':
+                            sectionType = 'CV/Resume section';
+                            break;
+                        default:
+                            sectionType = `${section.id || 'unnamed'} section`;
+                    }
+                    logEvent('view', sectionType);
+                    sectionObserver.unobserve(section);
                 }
             });
-        }, {threshold: 0.5});
-        
-        const elementsToTrack = document.querySelectorAll('img, section, .profile-img');
-        elementsToTrack.forEach(element => {
-            observer.observe(element);
+        }, { threshold: 0.3 });
+        document.querySelectorAll('section').forEach(section => {
+            sectionObserver.observe(section);
         });
-    } else {
-        console.log(`${getTimestamp()}, view, fallback_view_tracking_enabled`);
-        
-        window.addEventListener('scroll', debounce(function() {
-            document.querySelectorAll('section').forEach(section => {
-                if (isElementInViewport(section)) {
-                    console.log(`${getTimestamp()}, view, section: ${section.id || 'unnamed'}`);
-                }
-            });
-        }, 300));
     }
 }
 
-function isElementInViewport(el) {
-    const rect = el.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-function debounce(func, wait) {
-    let timeout;
-    return function() {
-        const context = this, args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            func.apply(context, args);
-        }, wait);
-    };
-}
-
-function trackNavigation() {
-    const navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const sectionId = this.getAttribute('href').substring(1);
-            console.log(`${getTimestamp()}, click, navigation: link to ${sectionId} section`);
-        });
-    });
-}
-
-function trackSpecificElements() {
-    const resumeLink = document.querySelector('a[href="resume.pdf"]');
-    if (resumeLink) {
-        resumeLink.addEventListener('click', function() {
-            console.log(`${getTimestamp()}, click, cv_download: resume.pdf`);
+function trackElementViews() {
+    if ('IntersectionObserver' in window) {
+        const elementObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    if (element.tagName === 'IMG') {
+                        if (element.closest('#That\\'s\\ me')) {
+                            logEvent('view', 'image: profile picture');
+                        } else if (element.closest('#birthplace')) {
+                            logEvent('view', `image: birthplace (${element.alt})`);
+                        }
+                    }
+                    if (element.closest('#about') && element.tagName === 'P') {
+                        logEvent('view', 'text: about paragraph');
+                    }
+                    elementObserver.unobserve(element);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('#That\\'s\\ me img, #birthplace img, #about p').forEach(element => {
+            elementObserver.observe(element);
         });
     }
-    
-    const birthplaceImages = document.querySelectorAll('#birthplace img');
-    birthplaceImages.forEach((img, index) => {
-        img.addEventListener('click', function() {
-            console.log(`${getTimestamp()}, click, birthplace_image: ${img.alt || 'image-' + (index+1)}`);
-        });
-    });
 }
 
-function getTimestamp() {
-    const now = new Date();
-    return now.toISOString();
+function trackCVLink() {
+    const cvLink = document.querySelector('a[href="resume.pdf"]');
+    if (cvLink) {
+        cvLink.addEventListener('click', function() {
+            logEvent('click', 'hyperlink: CV/Resume download');
+        });
+    }
+}
+
+function logEvent(eventType, eventObject) {
+    const timestamp = new Date().toISOString();
+    console.log(`${timestamp}, ${eventType}, ${eventObject}`);
 }
 
 window.addEventListener('beforeunload', function() {
-    console.log(`${getTimestamp()}, view, page_exit`);
-});
-
-document.addEventListener('change', function(event) {
-    if (event.target.tagName === 'SELECT') {
-        console.log(`${getTimestamp()}, click, drop-down: ${event.target.name || event.target.id || 'unnamed'} (selected: ${event.target.value})`);
-    }
+    logEvent('view', 'page_exit');
 });
