@@ -66,7 +66,7 @@ nav a:hover {
 section {
   padding: 20px;
   margin: 20px auto;
-  max-width: 900px;
+  max-width: 100%;
   background-color: #abfffb;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgb(170, 128, 128);
@@ -110,3 +110,99 @@ footer {
   margin-top: 40px;
   border-top: 2px solid #9e7272;
 }
+
+#skills ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+#skills li {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px 15px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#skills li:hover {
+  transform: translateY(-5px) scale(1.03);
+  background-color: #f5fdae;
+  color: #000;
+}
+
+#cv a {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: #eb9cff;
+  color: #000;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+#cv a:hover {
+  background-color: #f5fdae;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.images {
+  text-align: center;
+}
+
+.images img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 15px;
+  cursor: pointer;
+}
+
+.images img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  header h1 {
+      font-size: 1.8rem;
+  }
+
+  .images img {
+      max-width: 90%;
+      margin: 10px auto;
+      display: block;
+  }
+
+  nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+  }
+
+  nav a {
+      padding: 8px 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+section {
+  animation: fadeIn 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+section:nth-child(1) { animation-delay: 0.1s; }
+section:nth-child(2) { animation-delay: 0.2s; }
+section:nth-child(3) { animation-delay: 0.3s; }
+section:nth-child(4) { animation-delay: 0.4s; }
+section:nth-child(5) { animation-delay: 0.5s; }
+section:nth-child(6) { animation-delay: 0.6s; }
+
