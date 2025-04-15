@@ -9,7 +9,7 @@ body {
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
-  color: #000000;
+  color: #2c2929fd;
   line-height: 1.6;
 }
 
@@ -29,7 +29,7 @@ footer:hover {
 }
 
 header {
-  background-color: #f0f0f0;
+  background-color: #eb9cff;
   color: #000;
   text-align: center;
   padding: 20px 0;
@@ -52,13 +52,13 @@ section {
   padding: 20px;
   margin: 20px auto;
   max-width: 900px;
-  background-color: #ffffff;
+  background-color: #abfffb;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 section h2 {
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid #edffac;
   padding-bottom: 5px;
   margin-bottom: 15px;
 }
@@ -86,7 +86,7 @@ a {
 }
 
 footer {
-  background-color: #f0f0f0;
+  background-color: #ffaaaa;
   color: #000;
   text-align: center;
   padding: 15px 0;
