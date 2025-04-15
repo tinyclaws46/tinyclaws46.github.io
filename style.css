@@ -37,17 +37,18 @@ header {
 }
 .about-container {
   display: flex;
-  align-items: flex-start;
-  gap: 20px;
+  justify-content: flex-start;
+  align-items: center; 
+  gap: 20px; 
 }
 
 .profile-img {
-  width: 25%;
+  width: 25%; 
   max-width: 200px;
   height: auto;
-  border-radius: 10px;
-  order: 2;
+  border-radius: 10px; 
 }
+
 
 nav a {
   margin: 0 10px;
