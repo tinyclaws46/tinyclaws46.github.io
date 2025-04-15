@@ -35,19 +35,20 @@ header {
   padding: 20px 0;
   border-bottom: 2px solid #f5fdae;
 }
+
 .about-container {
   display: flex;
   justify-content: flex-start;
-  align-items: center; 
-  gap: 20px; 
+  align-items: center;
+  gap: 20px;
 }
 
 .profile-img {
-  width: 25%; 
-  max-width: 200px;
+  width: 200px;
   height: auto;
-  border-radius: 10px; 
+  border-radius: 10px;
 }
+
 
 
 nav a {
