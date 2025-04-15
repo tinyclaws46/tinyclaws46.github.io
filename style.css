@@ -1,15 +1,13 @@
-/* General body styles */
 body {
   font-family: Arial, sans-serif;
   font-style: italic;
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  background: linear-gradient(to bottom, #ffffff, #e0e0e0); /* white to light gray */
-  color: #000000; /* black text */
+  background: linear-gradient(to bottom, #ffffff, #e0e0e0); 
+  color: #000000; 
 }
 
-/* Header */
 header {
   background-color: #f0f0f0;
   color: #000;
@@ -18,7 +16,6 @@ header {
   border-bottom: 2px solid #ccc;
 }
 
-/* Sections */
 section {
   padding: 20px;
   margin: 20px auto;
@@ -28,14 +25,12 @@ section {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Section Headings */
 section h2 {
   border-bottom: 2px solid #ccc;
   padding-bottom: 5px;
   margin-bottom: 15px;
 }
 
-/* Image styles */
 .images img {
   margin: 10px;
   border-radius: 10px;
@@ -44,7 +39,6 @@ section h2 {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* Footer */
 footer {
   background-color: #f0f0f0;
   color: #000;
@@ -54,7 +48,6 @@ footer {
   border-top: 2px solid #ccc;
 }
 
-/* Link styling */
 a {
   color: #000;
   text-decoration: underline;
@@ -63,5 +56,27 @@ a {
 a:hover {
   text-decoration: none;
   font-style: normal;
+}
+
+body:hover,
+section:hover,
+section p:hover,
+section ul li:hover,
+section h2:hover,
+a:hover,
+nav a:hover,
+footer:hover {
+  color: red;
+}
+
+body,
+section,
+section p,
+section ul li,
+section h2,
+a,
+nav a,
+footer {
+  transition: color 0.3s ease;
 }
 
