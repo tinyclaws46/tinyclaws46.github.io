@@ -37,11 +37,8 @@ header {
 }
 .about-container {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
   gap: 20px;
-  flex-wrap: wrap;
-  flex-direction: row-reverse;
 }
 
 .profile-img {
@@ -49,6 +46,7 @@ header {
   max-width: 200px;
   height: auto;
   border-radius: 10px;
+  order: 2;
 }
 
 nav a {
