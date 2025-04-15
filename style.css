@@ -3,7 +3,7 @@ body {
   font-style: italic;
   margin: 0;
   padding: 0;
-  background-color: #ad8aec;
+  background-color: #cdffbd;
   background-image: url('images/background.jpg');
   background-repeat: no-repeat;
   background-position: center center;
@@ -29,7 +29,7 @@ footer:hover {
 }
 
 header {
-  background-color: #eb9cff;
+  background-color: #ffb9d0;
   color: #000;
   text-align: center;
   padding: 20px 0;
@@ -206,3 +206,39 @@ section:nth-child(4) { animation-delay: 0.4s; }
 section:nth-child(5) { animation-delay: 0.5s; }
 section:nth-child(6) { animation-delay: 0.6s; }
 
+.result-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #fdedcb;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(146, 115, 115, 0.795);
+}
+
+.result-card {
+  background: rgb(174, 255, 98);
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin: 1rem 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+  transition: all 0.3s ease-in-out;
+}
+
+.result-card:hover {
+  transform: scale(1.01);
+  background-color: #ff9292;
+}
+
+.result-card h4 {
+  margin-bottom: 0.5rem;
+  color: #0508c7c0;
+}
+
+.result-card ul {
+  list-style-type: square;
+  padding-left: 1.2rem;
+  line-height: 1.6;
+}
+
+.main-heading {
+  font-size: 4em;
+}

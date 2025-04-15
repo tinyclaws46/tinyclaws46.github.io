@@ -9,7 +9,7 @@
 </head>
 <body>
   <header>
-    <h1>Hello! My name is Vaishnavi Amol Badhe</h1>
+    <h1 class="main-heading">Hello! My name is Vaishnavi Amol Badhe</h1>
     <p>welcome aboard!</p>
     <nav>
       <a href="#about">about me</a> |
@@ -71,11 +71,22 @@
     <a href="resume.pdf" target="_blank">📄 Download Resume/CV</a>
   </section>
 
+  <section id="text-analysis">
+    <h2>Text Analysis Playground</h2>
+    <textarea id="textInput" placeholder="Write your words here ->" rows="20" cols="100"></textarea><br>
+    <button onclick="analyzeText()"> ANALYZE</button>
+  
+    <div id="results"></div>
+  </section>
+  
+
   <footer>
     <p>© Vaishnavi Amol Badhe | No Rights Reserved (lol)</p>
   </footer>
 
   <script src="script.js"></script>
+  <script src="analyze.js"></script>
+
 </body>
 </html>
 
