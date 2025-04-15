@@ -85,6 +85,21 @@ a {
   text-decoration: underline;
 }
 
+.about-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.profile-img {
+  width: 25%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
+}
+
+
 footer {
   background-color: #ffaaaa;
   color: #444444;
