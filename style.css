@@ -1,0 +1,67 @@
+/* General body styles */
+body {
+  font-family: Arial, sans-serif;
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  background: linear-gradient(to bottom, #ffffff, #e0e0e0); /* white to light gray */
+  color: #000000; /* black text */
+}
+
+/* Header */
+header {
+  background-color: #f0f0f0;
+  color: #000;
+  padding: 20px 0;
+  text-align: center;
+  border-bottom: 2px solid #ccc;
+}
+
+/* Sections */
+section {
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Headings */
+section h2 {
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+/* Image styles */
+.images img {
+  margin: 10px;
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer */
+footer {
+  background-color: #f0f0f0;
+  color: #000;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
+  border-top: 2px solid #ccc;
+}
+
+/* Link styling */
+a {
+  color: #000;
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+  font-style: normal;
+}
+
