@@ -35,6 +35,21 @@ header {
   padding: 20px 0;
   border-bottom: 2px solid #f5fdae;
 }
+.about-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+}
+
+.profile-img {
+  width: 25%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
+}
 
 nav a {
   margin: 0 10px;
@@ -85,19 +100,6 @@ a {
   text-decoration: underline;
 }
 
-.about-container {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.profile-img {
-  width: 25%;
-  max-width: 200px;
-  height: auto;
-  border-radius: 10px;
-}
 
 
 footer {
